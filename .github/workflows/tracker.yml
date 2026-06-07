@@ -1,0 +1,24 @@
+name: Run Amul Tracker
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # This means "Run every 5 minutes"
+  workflow_dispatch:       # This gives you a manual "Run" button
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Grab my files
+        uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+          
+      - name: Install Requests
+        run: pip install -r requirements.txt
+        
+      - name: Run my Tracker!
+        run: python amul_bot.py
